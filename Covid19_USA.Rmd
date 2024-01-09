@@ -31,7 +31,7 @@ The data was obtained from the official website of The COVID tracking project: <
 **Data-set description**
 
 | Variable                           | Description                                                                                                                                                                                                                                                                                 |
-|-----------------------------------------|-------------------------------------------------------------------------------------------------|
+|----------------------|--------------------------------------------------|
 | `date`                             | Date on which data was collected by The COVID Tracking Project.                                                                                                                                                                                                                             |
 | `state`                            | Two-letter abbreviation for the state or territory.                                                                                                                                                                                                                                         |
 | `death`                            | Total **fatalities with confirmed OR probable COVID-19 case diagnosis**.                                                                                                                                                                                                                    |
@@ -123,20 +123,24 @@ summary(data)
 
 Variable `date` is now as in date format, which will allow us to graph the time series in a better way. Also, `states` are now as factor, with 56 levels; which consist of the 50 states, the federal district and 5 major territories (American Samoa, Guam, Northern Mariana Islands, Puerto Rico and the US virgin islands).
 
-Unfortunately, a lot of varibles have too many NA values. Some of them even over 50%. So here the first thing is we need to deal with the NA values
+Unfortunately, a lot of variables have too many NA values. Some of them even over 50%. So here the first thing is we need to deal with the NA values:
 
 ```{r}
 na_count_dplyr <- data %>% summarise_all(~sum(is.na(.)))
 print(na_count_dplyr)
 ```
 
-Firstly, I will deal with the missing values of deathConfirmed and deathProbable. These 2 variables mean the total fatalities. But they have the significant NA values. So we must deal with it carefully Here, firstly, I will find the patterns of these missing values. I consider 2 perspectives: 1 region 2 time
+Firstly, we will deal with the missing values of `deathConfirmed` and `deathProbable`. These 2 variables mean the total fatalities. But they have the significant NA values. So we must deal with it carefully. Firstly, we will try to find the patterns of these missing values. We will consider 2 perspectives: States (region) and Time.
 
-State-wise Pattern: We'll summarize the number of missing values for each state. Time-wise Pattern: We'll summarize the number of missing values over time
+State-wise Pattern: We'll summarize the number of missing values for each state.
 
-##state wise pattern analysis here we create a bar plot with same height, each bar shows the percentage of confirmed and probable missing values. And above the bar, we show the numbers of total missing values.
+Time-wise Pattern: We'll summarize the number of missing values over time
 
-```{r}
+### State wise pattern analysis 
+
+Here we create a bar plot with same height, each bar shows the percentage of confirmed and probable missing values. And above the bar, we show the numbers of total missing values.
+
+```{r, warning=FALSE}
 # Calculate the percentage of missing values for each state
 state_missing_percentage <- data %>%
   group_by(state) %>%
@@ -150,22 +154,9 @@ state_missing_percentage <- data %>%
     Confirmed_Percentage = Confirmed_Missing / Total_Missing * 100,
     Probable_Percentage = Probable_Missing / Total_Missing * 100
   )
-
-# Plotting
-ggplot(state_missing_percentage, aes(x = state, y = 100)) +  # 100% bar height
-  geom_bar(aes(fill = "Confirmed Percentage"), stat = "identity", width = 0.7) +
-  geom_bar(aes(y = Probable_Percentage, fill = "Probable Percentage"), stat = "identity", width = 0.9) +
-
-  scale_fill_manual(values = c("Confirmed Percentage" = "blue", "Probable Percentage" = "orange")) +
-  theme_minimal() +
-  theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
-  labs(title = "Percentage of Missing Data Types by State",
-       x = "State",
-       y = "Percentage",
-       fill = "Data Type")
 ```
 
-Not good enough, because the boundries of each bar is not clear. It influences us too much. Now I change the boundries to grey. And I need to make the canvas bigger to see everything clear
+We configured the plot in a way that the boundaries are colored in to grey, to be able to see them better. And it was necessary to make the canvas bigger to see everything clear:
 
 ```{r fig.width=10, fig.height=8}
 ggplot(state_missing_percentage, aes(x = state, y = 100)) +
