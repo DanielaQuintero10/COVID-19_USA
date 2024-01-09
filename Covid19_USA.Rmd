@@ -30,101 +30,186 @@ The data was obtained from the official website of The COVID tracking project: <
 
 **Data-set description**
 
-| Variable                           | Description                                                                                                                                                                                                                                                                                    |
-|---------------------------|-------------------------------------------------------------------------------------------------|
-| `date`                             | Date on which data was collected by The COVID Tracking Project.                                                                                                                                                                                                                                |
-| `state`                            | Two-letter abbreviation for the state or territory.                                                                                                                                                                                                                                            |
-| `death`                            | Daily increase in *hospitalizedCumulative*, calculated from the previous day's value.                                                                                                                                                                                                          |
-| `deathConfirmed`                   | Total **fatalities with confirmed COVID-19 case diagnosis.**                                                                                                                                                                                                                                   |
-| `deathIncrease`                    | Daily increase in death, calculated from the previous day's value.                                                                                                                                                                                                                             |
-| `deathProbable`                    | Total **fatalities with probable COVID-19 case diagnosis**                                                                                                                                                                                                                                     |
-| `hospitalized`                     | Total number of **unique** **individuals who have** **ever been hospitalized** with COVID-19.                                                                                                                                                                                                  |
-| `hospitalizedCumulative`           | Total number of individuals who have **ever been hospitalized with COVID-19**.                                                                                                                                                                                                                 |
-| `hospitalizedCurrently`            | Individuals who are **currently hospitalized with COVID-19.**                                                                                                                                                                                                                                  |
-| `hospitalizedIncrease`             | Daily increase in *hospitalizedCumulative*, calculated from the previous day's value.                                                                                                                                                                                                          |
-| `inIcuCumulative`                  | Total number of individuals who have **ever been hospitalized in the Intensive Care Unit with COVID-19**                                                                                                                                                                                       |
-| `inIcuCurrently`                   | Individuals who are **currently hospitalized in the Intensive Care Unit with COVID-19**                                                                                                                                                                                                        |
-| `negative`                         | Total number of **unique people with a completed PCR test that returns negative**.                                                                                                                                                                                                             |
-| `negativeIncrease`                 | Daily increase on negative variable                                                                                                                                                                                                                                                            |
-| `negativeTestsAntibody`            | The total number of completed antibody tests that return negative as reported by the state or territory.                                                                                                                                                                                       |
-| `negativeTestsPeopleAntibody`      | The total number of unique people with completed antibody tests that return negative as reported by the state or territory.                                                                                                                                                                    |
-| `negativeTestsViral`               | Total number of completed PCR tests (or specimens tested) that return negative as reported by the state or territory                                                                                                                                                                           |
-| `onVentilatorCumulative`           | Total number of individuals who have **ever been hospitalized under advanced ventilation with COVID-19.**                                                                                                                                                                                      |
-| `onVentilatorCurrently`            | Individuals who are **currently hospitalized under advanced ventilation with COVID-19.**                                                                                                                                                                                                       |
-| `positive`                         | Total number of confirmed plus probable cases of COVID-19 reported by the state or territory                                                                                                                                                                                                   |
-| `positiveCasesViral`               | Total number of unique people with a positive PCR or other approved nucleic acid amplification test (NAAT), as reported by the state or territory.                                                                                                                                             |
-| `postiveIncrease`                  | The daily increase in field *positive*, which measures cases(confirmed + probable) calculated based on the previous day's value.                                                                                                                                                               |
-| ~~`positiveScore`~~                | This variable is not defined in the website but also all value are 0, so we will drop it from the project.                                                                                                                                                                                     |
-| `positiveTestsAntibody`            | Total number of completed antibody tests that return positive as reported by the state or territory.                                                                                                                                                                                           |
-| `positiveTestsAntigen`             | Total number of **completed antigen tests that return positive** as reported by the state or territory                                                                                                                                                                                         |
-| `positiveTestsPeopleAntibody`      | The total number of unique people with completed antibody tests that return positive as reported by the state or territory.                                                                                                                                                                    |
-| `positiveTestsPeopleAntigen`       | Total number of **unique people with a completed antigen test that returned positive** as reported by the state or territory                                                                                                                                                                   |
-| `positiveTestsViral`               | Total number of completed PCR tests (or specimens tested) that return positive as reported by the state or territory                                                                                                                                                                           |
-| `recovered`                        | Total number of **people that are identified as recovered from COVID-19**. Types of "recovered" cases include those who are discharged from hospitals, released from isolation, or those who have not been identified as fatalities after a number of days (30 or more) post disease onset.    |
-| `totalTestEncountersViral`         | Total number of people tested *per day* via PCR testing as reported by the state or territory.                                                                                                                                                                                                 |
-| `totalTestEncountersViralIncrease` | Daily increase in totalTestEncountersViral                                                                                                                                                                                                                                                     |
-| `totalTestResults`                 | In most states, the totalTestResults field is currently computed by adding positive and negative values because, historically, some states do not report totals, and to work around different reporting cadences for cases and tests.                                                          |
-| ~~`totalTestResultsIncrease`~~     | Daily increase in *totalTestResults*, calculated from the previous day's value. This calculation includes all the caveats associated with Total tests/*totalTestResults*, and **it is recommended against using it at the state/territory level**, so we will not be using it in this project. |
-| `totalTestsAntibody`               | Total number of **completed antibody tests** as reported by the state or territory                                                                                                                                                                                                             |
-| `totalTestAntigen`                 | Total number of **completed antigen tests**, as reported by the state or territory.                                                                                                                                                                                                            |
-| `totalTestsPeopleAntibody`         | The total number of **unique people who have been tested at least once via antibody testing** as reported by the state or territory.                                                                                                                                                           |
-| `totalTestsPeopleAntigen`          | Total number of **unique people who have been tested at least once via antigen testing**, as reported by the state or territory                                                                                                                                                                |
-| `totalTestsPeopleViral`            | Total number of unique people tested at least once via PCR testing, as reported by the state or territory.                                                                                                                                                                                     |
-| `totalTestsPeopleViralIncrease`    | Daily increase in totalTestsPeopleViral                                                                                                                                                                                                                                                        |
-| `totalTestsViral`                  | Total number of PCR tests (or specimens tested) as reported by the state or territory.                                                                                                                                                                                                         |
-| `totalTestsViralIncrease`          | Daily increase in totalTestsViral                                                                                                                                                                                                                                                              |
+| Variable                           | Description                                                                                                                                                                                                                                                                                 |
+|-----------------------------------------|-------------------------------------------------------------------------------------------------|
+| `date`                             | Date on which data was collected by The COVID Tracking Project.                                                                                                                                                                                                                             |
+| `state`                            | Two-letter abbreviation for the state or territory.                                                                                                                                                                                                                                         |
+| `death`                            | Total **fatalities with confirmed OR probable COVID-19 case diagnosis**.                                                                                                                                                                                                                    |
+| `deathConfirmed`                   | Total **fatalities with confirmed COVID-19 case diagnosis.**                                                                                                                                                                                                                                |
+| `deathIncrease`                    | Daily increase in `death`, calculated from the previous day's value.                                                                                                                                                                                                                        |
+| `deathProbable`                    | Total **fatalities with probable COVID-19 case diagnosis**                                                                                                                                                                                                                                  |
+| `hospitalized`                     | Total number of **unique** **individuals who have** **ever been hospitalized** with COVID-19.                                                                                                                                                                                               |
+| `hospitalizedCumulative`           | Total number of individuals who have **ever been hospitalized with COVID-19**.                                                                                                                                                                                                              |
+| `hospitalizedCurrently`            | Individuals who are **currently hospitalized with COVID-19.**                                                                                                                                                                                                                               |
+| `hospitalizedIncrease`             | Daily increase in `hospitalizedCumulative`, calculated from the previous day's value.                                                                                                                                                                                                       |
+| `inIcuCumulative`                  | Total number of individuals who have **ever been hospitalized in the Intensive Care Unit with COVID-19**                                                                                                                                                                                    |
+| `inIcuCurrently`                   | Individuals who are **currently hospitalized in the Intensive Care Unit with COVID-19**                                                                                                                                                                                                     |
+| `negative`                         | Total number of **unique people with a completed PCR test that returns negative**.                                                                                                                                                                                                          |
+| `negativeIncrease`                 | Daily increase on `negative` variable                                                                                                                                                                                                                                                       |
+| `negativeTestsAntibody`            | The total number of completed antibody tests that return negative as reported by the state or territory.                                                                                                                                                                                    |
+| `negativeTestsPeopleAntibody`      | The total number of unique people with completed antibody tests that return negative as reported by the state or territory.                                                                                                                                                                 |
+| `negativeTestsViral`               | Total number of completed PCR tests (or specimens tested) that return negative as reported by the state or territory                                                                                                                                                                        |
+| `onVentilatorCumulative`           | Total number of individuals who have **ever been hospitalized under advanced ventilation with COVID-19.**                                                                                                                                                                                   |
+| `onVentilatorCurrently`            | Individuals who are **currently hospitalized under advanced ventilation with COVID-19.**                                                                                                                                                                                                    |
+| `positive`                         | Total number of confirmed plus probable cases of COVID-19 reported by the state or territory                                                                                                                                                                                                |
+| `positiveCasesViral`               | Total number of unique people with a positive PCR or other approved nucleic acid amplification test (NAAT), as reported by the state or territory.                                                                                                                                          |
+| `postiveIncrease`                  | The daily increase in field `positive`, which measures cases(confirmed + probable) calculated based on the previous day's value.                                                                                                                                                            |
+| ~~`positiveScore`~~                | This variable is not defined in the website but also all values are 0, so we will drop it from the project.                                                                                                                                                                                 |
+| `positiveTestsAntibody`            | Total number of completed antibody tests that return positive as reported by the state or territory.                                                                                                                                                                                        |
+| `positiveTestsAntigen`             | Total number of **completed antigen tests that return positive** as reported by the state or territory                                                                                                                                                                                      |
+| `positiveTestsPeopleAntibody`      | The total number of unique people with completed antibody tests that return positive as reported by the state or territory.                                                                                                                                                                 |
+| `positiveTestsPeopleAntigen`       | Total number of **unique people with a completed antigen test that returned positive** as reported by the state or territory                                                                                                                                                                |
+| `positiveTestsViral`               | Total number of completed PCR tests (or specimens tested) that return positive as reported by the state or territory                                                                                                                                                                        |
+| `recovered`                        | Total number of **people that are identified as recovered from COVID-19**. Types of "recovered" cases include those who are discharged from hospitals, released from isolation, or those who have not been identified as fatalities after a number of days (30 or more) post disease onset. |
+| `totalTestEncountersViral`         | Total number of people tested *per day* via PCR testing as reported by the state or territory.                                                                                                                                                                                              |
+| `totalTestEncountersViralIncrease` | Daily increase in `totalTestEncountersViral`                                                                                                                                                                                                                                                |
+| `totalTestResults`                 | In most states, the `totalTestResults` field is currently computed by adding positive and negative values because, historically, some states do not report totals, and to work around different reporting cadences for cases and tests.                                                     |
+| ~~`totalTestResultsIncrease`~~     | Daily increase in `totalTestResults`, calculated from the previous day's value. This calculation includes all the caveats associated with `totalTestResults`, and **it is recommended against using it at the state/territory level**, so we will not be using it in this project.          |
+| `totalTestsAntibody`               | Total number of **completed antibody tests** as reported by the state or territory                                                                                                                                                                                                          |
+| `totalTestAntigen`                 | Total number of **completed antigen tests**, as reported by the state or territory.                                                                                                                                                                                                         |
+| `totalTestsPeopleAntibody`         | The total number of **unique people who have been tested at least once via antibody testing** as reported by the state or territory.                                                                                                                                                        |
+| `totalTestsPeopleAntigen`          | Total number of **unique people who have been tested at least once via antigen testing**, as reported by the state or territory                                                                                                                                                             |
+| `totalTestsPeopleViral`            | Total number of unique people tested at least once via PCR testing, as reported by the state or territory.                                                                                                                                                                                  |
+| `totalTestsPeopleViralIncrease`    | Daily increase in `totalTestsPeopleViral`                                                                                                                                                                                                                                                   |
+| `totalTestsViral`                  | Total number of PCR tests (or specimens tested) as reported by the state or territory.                                                                                                                                                                                                      |
+| `totalTestsViralIncrease`          | Daily increase in `totalTestsViral`                                                                                                                                                                                                                                                         |
 
 > ##### Data-set definition sourced from the CoVid-tracking website: <https://covidtracking.com/about-data/data-definitions>
 
 ```{r install_packages, message=FALSE, warning=FALSE, echo=FALSE, include=FALSE}
 packages_to_install <- c("rmarkdown", "renv", "shiny", "ggplot2", "dplyr", "tidyr", "usmap")
-install.packages(packages_to_install)
-```
-
-### **Data cleaning and exploratory analysis**
-
-```{r libraries, message=FALSE, warning=FALSE, paged.print=TRUE, fig.height=20}
+#install.packages(packages_to_install)
 library(renv)
 library(shiny)
 library(ggplot2)
 library(dplyr)
 library(tidyr)
 library(usmap)
+```
 
+### **Data cleaning and exploratory analysis**
+
+Now we read and print the summary of the data:
+
+```{r, message=FALSE, warning=FALSE, paged.print=TRUE, fig.height=20}
+setwd("~/Library/CloudStorage/GoogleDrive-d.quinterona@student.uw.edu.pl/My Drive/UW/III-Semester/Visualization in R/Final Project/COVID-19_USA")
 data <- read.csv("data/all-states-history (1).csv",sep=",")
 print(summary(data))
 ```
 
-The summary of the data shows significant missing values for some variables, but due to the complexity of the attributes and the way the data was constructed we will replace them with 0.
-
-Additionally, it is necessary to categorize the variables properly before moving to the visualization and analysis:
+It is necessary to categorize the variables properly before moving to the visualization and analysis:
 
 ```{r, message=FALSE, warning=FALSE}
 str(data)
 
 ```
 
-We need to categorize `date` as a date class and `state` as factor to be able to visualize the data properly in the plots and in the dashboard page. We will also drop the column `totalTestResultsIncrease` as it was recommended not to use it by the creators of the data due to inaccuracies.
+We need to categorize `date` as a date class and `state` as factor to be able to visualize the data properly in the plots and in the dashboard page. We will also drop the columns `totalTestResultsIncrease` and `positiveScore` as it was recommended not to use it by the creators of the data due to inaccuracies.
 
 ```{r dataTransform, message=FALSE, warning=FALSE}
-data_transformed <- data
-data_transformed$date <- as.Date(data_transformed$date)
-data_transformed$state <- as.factor(data_transformed$state)
+data$date <- as.Date(data$date, format = "%Y-%m-%d")
+data$state <- as.factor(data$state)
 
-data_transformed <- replace(data_transformed, is.na(data_transformed), 0)
-
-data_transformed <- data_transformed %>%
+data <- data %>%
   select(-c("positiveScore", "totalTestResultsIncrease"))
 ```
 
 After transformation, the data:
 
 ```{r}
-str(data_transformed)
-summary(data_transformed)
+str(data)
+summary(data)
 ```
 
 Variable `date` is now as in date format, which will allow us to graph the time series in a better way. Also, `states` are now as factor, with 56 levels; which consist of the 50 states, the federal district and 5 major territories (American Samoa, Guam, Northern Mariana Islands, Puerto Rico and the US virgin islands).
+
+Unfortunately, a lot of varibles have too many NA values. Some of them even over 50%. So here the first thing is we need to deal with the NA values
+
+```{r}
+na_count_dplyr <- data %>% summarise_all(~sum(is.na(.)))
+print(na_count_dplyr)
+```
+
+Firstly, I will deal with the missing values of deathConfirmed and deathProbable. These 2 variables mean the total fatalities. But they have the significant NA values. So we must deal with it carefully Here, firstly, I will find the patterns of these missing values. I consider 2 perspectives: 1 region 2 time
+
+State-wise Pattern: We'll summarize the number of missing values for each state. Time-wise Pattern: We'll summarize the number of missing values over time
+
+##state wise pattern analysis here we create a bar plot with same height, each bar shows the percentage of confirmed and probable missing values. And above the bar, we show the numbers of total missing values.
+
+```{r}
+# Calculate the percentage of missing values for each state
+state_missing_percentage <- data %>%
+  group_by(state) %>%
+  summarise(
+    Total = n(),  # Total count for each state
+    Confirmed_Missing = sum(is.na(deathConfirmed)),
+    Probable_Missing = sum(is.na(deathProbable)),
+    Total_Missing = Confirmed_Missing + Probable_Missing
+  ) %>%
+  mutate(
+    Confirmed_Percentage = Confirmed_Missing / Total_Missing * 100,
+    Probable_Percentage = Probable_Missing / Total_Missing * 100
+  )
+
+# Plotting
+ggplot(state_missing_percentage, aes(x = state, y = 100)) +  # 100% bar height
+  geom_bar(aes(fill = "Confirmed Percentage"), stat = "identity", width = 0.7) +
+  geom_bar(aes(y = Probable_Percentage, fill = "Probable Percentage"), stat = "identity", width = 0.9) +
+
+  scale_fill_manual(values = c("Confirmed Percentage" = "blue", "Probable Percentage" = "orange")) +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
+  labs(title = "Percentage of Missing Data Types by State",
+       x = "State",
+       y = "Percentage",
+       fill = "Data Type")
+```
+
+Not good enough, because the boundries of each bar is not clear. It influences us too much. Now I change the boundries to grey. And I need to make the canvas bigger to see everything clear
+
+```{r fig.width=10, fig.height=8}
+ggplot(state_missing_percentage, aes(x = state, y = 100)) +
+  geom_bar(aes(fill = "Confirmed Percentage"), stat = "identity", width = 0.8, color = "grey") +
+  geom_bar(aes(y = Probable_Percentage, fill = "Probable Percentage"), stat = "identity", width = 0.8, color = "grey") +
+  scale_fill_manual(values = c("Confirmed Percentage" = "blue", "Probable Percentage" = "orange")) +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
+  labs(title = "Percentage of Missing Data Types by State",
+       x = "State",
+       y = "Percentage",
+       fill = "Data Type")
+```
+
+There are 2 states very strange, may have special reasons. Because almost all of their missing values are confirmed percentage. Probably, they have limited hospitals or economic state. We decide to remove all of the records of these 2 states to analyze. Then probably do special analysis for both of them later. They are NJ and ME
+
+```{r}
+# Removing records for NJ and ME
+data_filtered <- data %>%
+  filter(state != "NJ", state != "ME")
+```
+
+Now do the time wise pattern
+
+```{r}
+# Group by Year-Month and summarize the number of missing values
+time_pattern <- data %>%
+  mutate(YearMonth = format(date, "%Y-%m")) %>%
+  group_by(YearMonth) %>%
+  summarise(
+    Missing_deathConfirmed = sum(is.na(deathConfirmed)),
+    Missing_deathProbable = sum(is.na(deathProbable))
+  )
+
+# Plotting the time-wise missing data pattern
+ggplot(time_pattern, aes(x = YearMonth)) +
+  geom_line(aes(y = Missing_deathConfirmed, group = 1, colour = "deathConfirmed")) +
+  geom_line(aes(y = Missing_deathProbable, group = 1, colour = "deathProbable")) +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
+  labs(title = "Time-wise Missing Data for deathConfirmed and deathProbable",
+       x = "Year-Month",
+       y = "Number of Missing Values",
+       colour = "Variable")
+```
 
 ### Visualizing the data
 
